@@ -2,9 +2,10 @@
 # ex. statoCivile, appellativo
 # config
 FEATURE="socialInfo"
-TEST_FEATURE="maritalStatus"
+TEST_FEATURE="socialInfo"
 
 TEST_DAO_OUTPUT="./test/${TEST_FEATURE}.dao.go"
+TEST_DAO_EC_OUTPUT="./test/${TEST_FEATURE}.dao.ec.go"
 # auto variables
 OPTS=-DFEATURE=${FEATURE} -DENDPOINT=${ENDPOINT}
 TEST_OPTS=-DFEATURE=${TEST_FEATURE} -DENDPOINT=${ENDPOINT}
@@ -18,6 +19,7 @@ test: ${TEST_DAO_OUTPUT}
 
 ${TEST_DAO_OUTPUT}:
 	m4 ${LIBS} ${TEST_OPTS} src/feature.dao.m4 > ${TEST_DAO_OUTPUT}
+	m4 ${LIBS} ${TEST_OPTS} src/feature.dao.ec.m4 > ${TEST_DAO_EC_OUTPUT}
 
 clean:
 	rm dist/*.go

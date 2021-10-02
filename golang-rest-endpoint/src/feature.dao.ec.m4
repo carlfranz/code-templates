@@ -31,11 +31,13 @@ var (
 type m4_POJONAME struct {
 	ID        int    `gorm:"primaryKey";default: nextval('m4_SEQNAME«_id_seq»')`
 	Value     string
+	RegistryId int
 	DeletedAt gorm.DeletedAt
 }
 
 type m4_POJONAME«DAO» interface {
 	FindAll(db *gorm.DB) (results []*m4_POJONAME, count int64, err error)
+	FindByRegistryId(db *gorm.DB, registryId int) (results []*m4_POJONAME, count int64, err error)
 	Update(db *gorm.DB, id int64, arg *m4_POJONAME) (result *m4_POJONAME, err error)
 	Create(db *gorm.DB, arg *m4_POJONAME) (id int64, err error)
 	FindOne(db *gorm.DB, id int64) (result *m4_POJONAME, err error)
@@ -53,6 +55,17 @@ func (di *m4_POJONAME) FindAll(db *gorm.DB) (results []*m4_POJONAME, count int64
 
 	return results, res.RowsAffected, nil
 }
+
+func (di *m4_POJONAME) FindByRegistryId(db *gorm.DB, registryId int) (results []*m4_POJONAME, count int64, err error) {
+	table := db.Table("m4_TABLENAME")
+	res := table.Where(&m4_POJONAME{RegistryId: registryId}).Find(&results)
+	if res.Error != nil {
+		fmt.Println("Error retrieving data")
+		return nil, 0, ErrGeneric
+	}
+	return results, res.RowsAffected, nil
+}
+
 
 func (di *m4_POJONAME) Update(db *gorm.DB, id int64, arg *m4_POJONAME) (result *m4_POJONAME, err error) {
 	var m4_INSTANCENAME m4_POJONAME
