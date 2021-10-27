@@ -1,8 +1,8 @@
 # type here the feature name in lowercase
 # ex. stato-civile, appellativo, the application
 # will provide to capitalize them
-FEATURE="legal-subject-social"
-ENDPOINT="registries/{id}/socials"
+FEATURE="professional-info"
+ENDPOINT="{environment.registriesMsBaseApiUrl}/professional-info"
 
 OPTS=-DFEATURE=${FEATURE} -DENDPOINT=${ENDPOINT}
 LIBS=-I/usr/share/doc/m4/examples/ -Ilib

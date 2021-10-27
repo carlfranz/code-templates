@@ -1,7 +1,7 @@
 # type here the feature name in lowercase
 # ex. stato-civile, appellativo, the application
 # will provide to capitalize them
-FEATURE="legal-subject-social"
+FEATURE="professional-info"
 
 OPTS=-DFEATURE=${FEATURE}
 LIBS=-I/usr/share/doc/m4/examples/ -Ilib

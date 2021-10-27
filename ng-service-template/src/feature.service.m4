@@ -2,7 +2,8 @@ divert(-1)dnl
 include(`capitalize.m4')dnl
 define(classname, `patsubst(capitalize($1), `-', `')')dnl
 define(POJONAME, classname(FEATURE))dnl
-define(SERVICENAME, `classname(FEATURE)Service')dnl
+define(SERVICENAME, `classname(FEATURE)«Service»')dnl
+changequote(`«', `»')
 divert(0)dnl
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
@@ -20,12 +21,12 @@ export class SERVICENAME {
 
   list(): Observable<POJONAME[]> {
     console.info("Retrieving a list of POJONAME from server");
-    return this.http.get("ENDPOINT");
+    return this.http.get(`ENDPOINT`);
   }
 
   get(id: string): Observable<POJONAME> {
     console.info("Retrieving the POJONAME with id "+ id);
-    return this.http.get<POJONAME>("ENDPOINT/"+id);
+    return this.http.get<POJONAME>(`ENDPOINT/${id}`);
   }
 
   save(id: number, entity: POJONAME): Observable<POJONAME> {
@@ -38,16 +39,16 @@ export class SERVICENAME {
 
   create(entity: POJONAME): Observable<POJONAME> {
     console.info("Creating a new POJONAME");
-    return this.http.post<POJONAME>("ENDPOINT", entity);
+    return this.http.post<POJONAME>(`ENDPOINT`, entity);
   }
 
   update(id: number, entity: POJONAME): Observable<POJONAME> {
     console.info("Updating the POJONAME with id "+id);
-    return this.http.put<POJONAME>("ENDPOINT/"+id, entity);
+    return this.http.put<POJONAME>(`ENDPOINT/${id}`, entity);
   }
 
   remove(id: number): Observable<{}> {
     console.info("Deleting the POJONAME with id"+ id);
-    return this.http.delete<{}>("ENDPOINT/"+id);
+    return this.http.delete<{}>(`ENDPOINT/${id}`);
   }
 }

@@ -1,7 +1,7 @@
 # type here the feature name in lowercase
 # ex. statoCivile, appellativo
 # config
-FEATURE="socialInfo"
+FEATURE="professionalInfo"
 TEST_FEATURE="socialInfo"
 
 TEST_DAO_OUTPUT=./test/actual.dao.go
@@ -19,6 +19,10 @@ LIBS=-I/usr/share/doc/m4/examples/ -Ilib
 ALL:
 	m4 ${LIBS} ${OPTS} src/feature.handler.m4 > ./dist/${FEATURE}.handler.go
 	m4 ${LIBS} ${OPTS} src/feature.dao.m4 > ./dist/${FEATURE}.dao.go
+	m4 ${LIBS} ${OPTS} src/feature.dao.ec.m4 > ./dist/${FEATURE}.dao.ec.go
+	m4 ${LIBS} ${OPTS} src/feature.dao.ic.m4 > ./dist/${FEATURE}.dao.ic.go
+	m4 ${LIBS} ${OPTS} src/feature.handler.ic.m4 > ./dist/${FEATURE}.handler.ic.go
+	m4 ${LIBS} ${OPTS} src/feature.handler.ec.m4 > ./dist/${FEATURE}.handler.ec.go
 
 test: ${TEST_OUTPUTS}
 
